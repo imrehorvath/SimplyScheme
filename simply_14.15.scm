@@ -1,0 +1,7 @@
+(define (merge sent1 sent2)
+  (cond ((and (empty? sent1) (empty? sent2)) '())
+	((and (not (empty? sent1)) (empty? sent2)) sent1)
+	((and (empty? sent1) (not (empty? sent2))) sent2)
+	(else (if (< (first sent1) (first sent2))
+		  (se (first sent1) (merge (bf sent1) sent2))
+		  (se (first sent2) (merge sent1 (bf sent2)))))))

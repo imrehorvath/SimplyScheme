@@ -1,0 +1,10 @@
+(define (exaggerate sent)
+  (if (empty? sent)
+      '()
+      (se (process-wd (first sent)) (exaggerate (bf sent)))))
+
+(define (process-wd wd)
+  (cond ((number? wd) (+ wd wd))
+	((equal? wd 'good) 'great)
+	((equal? wd 'bad) 'terrible)
+	(else wd)))

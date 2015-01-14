@@ -1,0 +1,12 @@
+(define (my-keep pred stuff)
+  (cond ((word? stuff) (if (equal? stuff "")
+                           ""
+                           (if (pred (first stuff))
+                               (word (first stuff)
+                                     (my-keep pred (butfirst stuff)))
+                               (my-keep pred (butfirst stuff)))))
+        ((null? stuff) '())
+        (else (if (pred (first stuff))
+                  (se (first stuff)
+                      (my-keep pred (butfirst stuff)))
+                  (my-keep pred (butfirst stuff))))))

@@ -1,0 +1,42 @@
+;; BST ADT
+(define (make-bst-node datum)
+  (list datum '() '()))
+(define (bst-datum bst)
+  (car bst))
+(define (bst-left bst)
+  (cadr bst))
+(define (bst-right bst)
+  (caddr bst))
+(define (set-bst-left! bst datum)
+  (set-car! (cdr bst) datum))
+(define (set-bst-right! bst datum)
+  (set-car! (cdr (cdr bst)) datum))
+
+;; Insert a new node with a given datum
+(define (insert-into-bst bst datum)
+  (cond ((< datum (bst-datum bst))
+	 (if (null? (bst-left bst))
+	     (set-bst-left! bst (make-bst-node datum))
+	     (insert-into-bst (bst-left bst) datum)))
+	((> datum (bst-datum bst))
+	 (if (null? (bst-right bst))
+	     (set-bst-right! bst (make-bst-node datum))
+	     (insert-into-bst (bst-right bst) datum)))))
+
+;; The query procedure, which returns a list of BST datums in the given range
+(define (bst-query bst min max)
+  (cond ((null? bst) '())
+        ((< max (bst-datum bst)) (bst-query (bst-left bst) min max))
+        ((> min (bst-datum bst)) (bst-query (bst-right bst) min max))
+        (else (append (bst-query (bst-left bst) min max)
+                      (list (bst-datum bst))
+                      (bst-query (bst-right bst) min max)))))
+
+;; Build a BST for testing
+(define bst-root (make-bst-node 5))
+(insert-into-bst bst-root 3)
+(insert-into-bst bst-root 1)
+(insert-into-bst bst-root 4)
+(insert-into-bst bst-root 8)
+(insert-into-bst bst-root 7)
+(insert-into-bst bst-root 9)

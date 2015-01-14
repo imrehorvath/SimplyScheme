@@ -1,0 +1,15 @@
+(define (byob-map-helper count proc lst)
+  (if (empty? lst)
+      '()
+      (cons (proc count (car lst))
+	    (byob-map-helper (+ count 1) proc (cdr lst)))))
+
+(define (byob-map proc lst)
+  (byob-map-helper 1 proc lst))
+
+(define (transpose matrix)
+  (byob-map (lambda (col x)
+	      (byob-map (lambda (hsmark y)
+			  (item col y))
+			matrix))
+	    (first matrix)))

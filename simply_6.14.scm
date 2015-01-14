@@ -1,0 +1,12 @@
+(define (describe-time time)
+  (cond ((between? time 0 59) (se time 'seconds))
+	((between? time 60 3599) (se (/ time 60) 'minutes))
+	((between? time 3600 86399) (se (/ time 3600) 'hours))
+	((between? time 86400 604799) (se (/ time 86400) 'days))
+	((between? time 604800 2419199) (se (/ time 604800) 'weeks))
+	((between? time 2419200 29030399) (se (/ time 2419200) 'months))
+	((between? time 29030400 2903039999) (se (/ time 29030400) 'years))
+	(else (se (/ time 2903040000) 'centuries))))
+
+(define (between? number min max)
+  (and (>= number min) (<= number max)))

@@ -1,0 +1,11 @@
+(define (expand sent)
+  (cond ((empty? sent) '())
+	((= (count sent) 1) (se sent))
+	((number? (first sent)) (se (word-times (first (bf sent)) (first sent))
+				    (expand (bf (bf sent)))))
+	(else (se (first sent) (expand (bf sent))))))
+
+(define (word-times wd times)
+  (if (= times 0)
+      '()
+      (se wd (word-times wd (- times 1)))))

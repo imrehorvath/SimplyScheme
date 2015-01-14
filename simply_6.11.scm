@@ -1,0 +1,27 @@
+(define (valid-date? month day year)
+  (and (between? month 1 12)
+       (between? day 1 (max-day month year))))
+
+(define (max-day month year)
+  (cond ((= month 1) 31)
+	((= month 2) (if (leap-year? year) 29 28))
+	((= month 3) 31)
+	((= month 4) 30)
+	((= month 5) 31)
+	((= month 6) 30)
+	((= month 7) 31)
+	((= month 8) 31)
+	((= month 9) 30)
+	((= month 10) 31)
+	((= month 11) 30)
+	((= month 12) 31)))
+
+(define (between? number min max)
+  (and (>= number min) (<= number max)))
+
+(define (leap-year? year)
+  (or (and (divisible? year 4) (not (divisible? year 100)))
+      (divisible? year 400)))
+
+(define (divisible? big little)
+  (= (remainder big little) 0))

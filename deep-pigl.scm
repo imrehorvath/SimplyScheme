@@ -1,0 +1,5 @@
+(define (deep-pigl structure)
+  (cond ((word? structure) (safe-pigl structure))
+	((null? structure) '())
+	(else (cons (deep-pigl (car structure))
+		    (deep-pigl (cdr structure))))))

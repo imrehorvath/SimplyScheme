@@ -1,0 +1,11 @@
+(define (greet name)
+  (cond ((equal? (first name) 'dr)
+	 (se '(hello dr) (if (equal? (last name) 'jr)
+			     (last (bl name))
+			     (last name))))
+	((equal? (first name) 'queen) '(hello your majesty))
+	((equal? name '(david livingstone)) '(dr livingstone i presume?))
+	((equal? (first name) 'professor) (se '(pleased to meet you)
+					      'professor
+					      (last name)))
+	(else (se 'hello (first name)))))

@@ -1,0 +1,5 @@
+(define (unabbrev orig words)
+  (every (lambda (wd) (if (number? wd)
+			  (first ((repeated bf (- wd 1)) words))
+			  wd))
+	 orig))
