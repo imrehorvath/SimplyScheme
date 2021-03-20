@@ -1,8 +1,8 @@
 ;;;
-;;; Parse infix arithmetic expressions.
+;;; Support infix arithmetic expressions.
 ;;;
 
-;;; Parser
+;;; Parse
 
 (define (parse expr)
   (parse-helper expr '() '()))
@@ -35,7 +35,7 @@
 		      (cddr operands))
 		(cdr operators)))
 
-;;; Computer
+;;; Compute
 
 (define (compute-tree tree)
   (if (number? (datum tree))
@@ -46,17 +46,17 @@
 
 ;;; Abstraction
 
-;; Parse Tree ADT
+;; Parse Tree
 
 (define make-node cons)
 (define datum car)
 (define children cdr)
 
-;; Expression abstraction
+;; Expressions
 
 (define sub-expr? list?)
 
-;; Operators abstraction
+;; Operators
 
 (define operators `((+ ,+ 1)
 		    (- ,- 1)
